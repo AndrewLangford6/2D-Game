@@ -9,6 +9,9 @@ namespace _2D_Game
 {
     class Hero
     {
+
+
+
         public SolidBrush heroBrush;
         public int x, y, size;
         Random randGen = new Random();
@@ -43,5 +46,26 @@ namespace _2D_Game
             }
 
         }
+
+        public void Jump()
+        {
+            MainScreen.jumpSpeed = 4;
+           MainScreen.gravity++;
+
+            if (MainScreen.gravity > 0)
+            {
+                MainScreen.gravity = 20;
+
+            }
+
+            y = y + MainScreen.gravity;
+        }
+
+        public void Fall()
+        {
+            y = y + MainScreen.jumpSpeed;
+        }
+        
+
     }
 }

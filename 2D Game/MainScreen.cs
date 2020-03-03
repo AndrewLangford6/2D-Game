@@ -13,10 +13,11 @@ namespace _2D_Game
     public partial class MainScreen : UserControl
     {
 
-        Boolean leftArrowDown, rightArrowDown;
+        Boolean leftArrowDown, rightArrowDown, upArrowDown;
 
         int hSize = 30;
-
+        public static bool jumping = false;
+        public static int gravity, jumpSpeed, counter;
 
 
         Hero hero;
@@ -30,6 +31,14 @@ namespace _2D_Game
         public void OnStart()
         {
             hero = new Hero(Width / 2 - hSize / 2, 400, hSize);
+
+            gravity = -20;
+            jumpSpeed = 4;
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -42,6 +51,9 @@ namespace _2D_Game
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
+                    break;
+                case Keys.Up:
+                    upArrowDown = true;
                     break;
             }
         }
@@ -57,10 +69,17 @@ namespace _2D_Game
                 case Keys.Right:
                     rightArrowDown = false;
                     break;
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
             }
         }
-        private void gameLoop_Tick(object sender, EventArgs e)
+        public void gameLoop_Tick(object sender, EventArgs e)
         {
+
+            hero.Fall();
+            counter++;
+
             if (leftArrowDown)
             {
                 hero.Move("left");
@@ -69,6 +88,21 @@ namespace _2D_Game
             if (rightArrowDown)
             {
                 hero.Move("right");
+            }
+
+
+            if (upArrowDown )
+            {
+
+                hero.Jump();
+            }
+            if (!upArrowDown)
+            {
+                gravity = -20;
+            }
+            if (hero.y + hero.size > 400)
+            {
+                hero.y = 400 - hero.size;
             }
 
             Refresh();
