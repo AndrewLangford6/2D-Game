@@ -17,6 +17,7 @@ namespace _2D_Game
 
         int hSize = 30;
         public static bool jumping = false;
+        public static bool jumping2 = false;
         public static int gravity, jumpSpeed, counter;
 
 
@@ -33,7 +34,7 @@ namespace _2D_Game
             hero = new Hero(Width / 2 - hSize / 2, 400, hSize);
 
             gravity = -20;
-            jumpSpeed = 4;
+            jumpSpeed = 0;
         }
 
         private void Label1_Click(object sender, EventArgs e)
@@ -70,7 +71,7 @@ namespace _2D_Game
                     rightArrowDown = false;
                     break;
                 case Keys.Up:
-                    upArrowDown = false;
+                   // upArrowDown = false;
                     break;
             }
         }
@@ -91,18 +92,23 @@ namespace _2D_Game
             }
 
 
-            if (upArrowDown )
+            if (upArrowDown)
             {
-
                 hero.Jump();
+
             }
             if (!upArrowDown)
             {
-                gravity = -20;
+                
             }
+            
+
             if (hero.y + hero.size > 400)
             {
+                
                 hero.y = 400 - hero.size;
+                upArrowDown = false;
+                gravity = -20;
             }
 
             Refresh();

@@ -37,28 +37,29 @@ namespace _2D_Game
         {
             if (direction == "left")
             {
-                x = x - 5;
+                x = x - 10;
             }
 
             if (direction == "right")
             {
-                x = x + 5;
+                x = x + 10;
             }
 
         }
 
         public void Jump()
         {
-            MainScreen.jumpSpeed = 4;
-           MainScreen.gravity++;
+                
+                MainScreen.jumpSpeed = 0;
+                MainScreen.gravity++;
 
-            if (MainScreen.gravity > 0)
-            {
-                MainScreen.gravity = 20;
+                if (MainScreen.gravity > 0)
+                {
+                     MainScreen.jumpSpeed++;
 
-            }
+                }
 
-            y = y + MainScreen.gravity;
+                y = y + MainScreen.gravity;
         }
 
         public void Fall()
