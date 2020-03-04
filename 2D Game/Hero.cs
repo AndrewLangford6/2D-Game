@@ -66,7 +66,26 @@ namespace _2D_Game
         {
             y = y + MainScreen.jumpSpeed;
         }
-        
 
+        public Boolean collision(Hero heroBox)
+        {
+
+            Rectangle heroRec = new Rectangle(heroBox.x, heroBox.y, heroBox.size, heroBox.size);
+
+            //draw boxes to screen
+
+            //e.Graphics.FillRectangle(boxBrush, x, y, size, size);
+            Rectangle blockRec = new Rectangle(x, y, size, size);
+
+            if (heroRec.IntersectsWith(blockRec))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

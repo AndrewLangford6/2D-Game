@@ -18,6 +18,10 @@ namespace _2D_Game
             y = _y;
             h = _h;
             w = _w;
+
+
         }
+
+
     }
 }

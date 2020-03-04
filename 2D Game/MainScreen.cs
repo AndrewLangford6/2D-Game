@@ -12,10 +12,19 @@ namespace _2D_Game
 {
     public partial class MainScreen : UserControl
     {
+        List<Block> blocksList = new List<Block>();
 
         Boolean leftArrowDown, rightArrowDown, upArrowDown;
 
         int hSize = 30;
+        
+        
+
+        int boxSize = 20;
+        int boxLeftX = 100;
+        int boxGap = 200;
+        int boxXOffset = 0;
+
         public static bool jumping = false;
         public static bool jumping2 = false;
         public static int gravity, jumpSpeed, counter;
@@ -111,11 +120,35 @@ namespace _2D_Game
                 gravity = -20;
             }
 
+            if (counter == 9)
+            {
+
+
+                boxLeftX += boxXOffset;
+
+                Block b1 = new Block(boxLeftX, 0, boxSize,boxSize);
+                blocksList.Add(b1);
+
+               
+
+                counter = 0;
+            }
+
+                //collision
+
+                foreach (Block b in blocksList)
+            {
+                if ()
+
+                
+            }
+
             Refresh();
         }
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(hero.heroBrush, hero.x, hero.y, hero.size, hero.size);
+            
         }
     }
 }
