@@ -17,8 +17,8 @@ namespace _2D_Game
         Boolean leftArrowDown, rightArrowDown, upArrowDown;
 
         int hSize = 30;
-        
-        
+
+        SolidBrush blue = new SolidBrush(Color.Blue);
 
         int boxSize = 20;
         int boxLeftX = 100;
@@ -126,7 +126,7 @@ namespace _2D_Game
 
                 boxLeftX += boxXOffset;
 
-                Block b1 = new Block(boxLeftX, 0, boxSize,boxSize);
+                Block b1 = new Block(20, 0, 600,20);
                 blocksList.Add(b1);
 
                
@@ -136,19 +136,24 @@ namespace _2D_Game
 
                 //collision
 
-                foreach (Block b in blocksList)
-            {
-                if ()
+            //    foreach (Block b in blocksList)
+            //{
+            //    if 
 
                 
-            }
+            //}
 
             Refresh();
         }
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.FillRectangle(hero.heroBrush, hero.x, hero.y, hero.size, hero.size);
-            
+
+            foreach (Block b in blocksList)
+            {
+                e.Graphics.FillRectangle(blue, b.x, b.y, b.w, b.h);
+            }
+
         }
     }
 }
