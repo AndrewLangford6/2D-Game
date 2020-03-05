@@ -20,15 +20,12 @@ namespace _2D_Game
 
         SolidBrush blue = new SolidBrush(Color.Blue);
 
-        int boxSize = 20;
-        int boxLeftX = 100;
-        int boxGap = 200;
-        int boxXOffset = 0;
+        
 
         public static bool jumping = false;
         public static bool jumping2 = false;
         public static int gravity, jumpSpeed, counter;
-
+        public static bool left, right, air;
 
         Hero hero;
 
@@ -42,7 +39,14 @@ namespace _2D_Game
         {
             hero = new Hero(Width / 2 - hSize / 2, 400, hSize);
 
-            gravity = -20;
+               // Block b1 = new Block(20, 0, 600, 20);
+            Block b2 = new Block(0, 415, 20, 800);
+            Block b3 = new Block(200, 280, 20, 100);
+           // blocksList.Add(b1);
+            blocksList.Add(b2);
+            blocksList.Add(b3);
+
+            gravity = -24;
             jumpSpeed = 0;
         }
 
@@ -89,17 +93,8 @@ namespace _2D_Game
 
             hero.Fall();
             counter++;
-
-            if (leftArrowDown)
-            {
-                hero.Move("left");
-            }
-
-            if (rightArrowDown)
-            {
-                hero.Move("right");
-            }
-
+            //hero.x  = this.Width / 2 - hero.size / 2;
+            
 
             if (upArrowDown)
             {
@@ -108,40 +103,87 @@ namespace _2D_Game
             }
             if (!upArrowDown)
             {
-                
-            }
-            
 
-            if (hero.y + hero.size > 400)
-            {
-                
-                hero.y = 400 - hero.size;
-                upArrowDown = false;
-                gravity = -20;
             }
 
             if (counter == 9)
             {
 
 
-                boxLeftX += boxXOffset;
+                
 
-                Block b1 = new Block(20, 0, 600,20);
-                blocksList.Add(b1);
+                
 
                
 
                 counter = 0;
             }
 
-                //collision
 
-            //    foreach (Block b in blocksList)
-            //{
-            //    if 
 
+            //collision
+
+            foreach (Block bonk in blocksList)
+            {
+                Rectangle heroRec = new Rectangle(hero.x, hero.y, hero.size, hero.size);
+                Rectangle blockRec = new Rectangle(bonk.x, bonk.y, bonk.w, bonk.h);
+
+                if (leftArrowDown)
+                {
+                    //hero.Move("left");
+                    bonk.Move("right");
+                    left = true;
+                    right = false;
+                }
+
+                if (rightArrowDown)
+                {
+                    //hero.Move("right");
+                    bonk.Move("left");
+                    right = true;
+                    left = false;
+                }
+
+                if (upArrowDown)
+                {
+                   // bonk.y++;
+                }
+
+
+
+                if (heroRec.IntersectsWith(blockRec) && hero.x <= bonk.x - 10 && hero.x + hero.size >= bonk.x + bonk.w + 10)
+                {
+                    
+                }
+                if (heroRec.IntersectsWith(blockRec) && hero.x >= bonk.x  - 10 && hero.x + hero.size <= bonk.x + bonk.w + 10)
+                {
+                    hero.y  = bonk.y - hero.size ;
+                    this.BackColor = Color.Purple;
+                    upArrowDown = false;
+                    air = false;
+                    gravity = -30;
+                    jumpSpeed = 0;
+                    hero.x = hero.x;
+                }
+
+
+               else if (left && heroRec.IntersectsWith(blockRec))
+                {
+                    hero.x = bonk.x + bonk.w;
+                }
+                else if (right && heroRec.IntersectsWith(blockRec))
+                {
+                    hero.x = bonk.x - hero.size;
+                }
+                else
+                {
+                    this.BackColor = Color.Green;
+                }
                 
-            //}
+
+
+
+            }
 
             Refresh();
         }

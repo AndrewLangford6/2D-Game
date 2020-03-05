@@ -49,8 +49,8 @@ namespace _2D_Game
 
         public void Jump()
         {
-                
-                MainScreen.jumpSpeed = 0;
+
+            MainScreen.air = true;
                 MainScreen.gravity++;
 
                 if (MainScreen.gravity > 0)
@@ -62,30 +62,15 @@ namespace _2D_Game
                 y = y + MainScreen.gravity;
         }
 
+
         public void Fall()
         {
             y = y + MainScreen.jumpSpeed;
+            MainScreen.jumpSpeed++;
         }
 
-        public Boolean collision(Hero heroBox)
-        {
+        
 
-            Rectangle heroRec = new Rectangle(heroBox.x, heroBox.y, heroBox.size, heroBox.size);
-
-            //draw boxes to screen
-
-            //e.Graphics.FillRectangle(boxBrush, x, y, size, size);
-            Rectangle blockRec = new Rectangle(x, y, size, size);
-
-            if (heroRec.IntersectsWith(blockRec))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
+        
     }
 }

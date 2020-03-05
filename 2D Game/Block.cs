@@ -22,6 +22,18 @@ namespace _2D_Game
 
         }
 
+        public void Move(string direction)
+        {
+            if (direction == "left")
+            {
+                x = x - 10;
+            }
 
+            if (direction == "right")
+            {
+                x = x + 10;
+            }
+
+        }
     }
 }
