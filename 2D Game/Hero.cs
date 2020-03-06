@@ -50,14 +50,15 @@ namespace _2D_Game
         public void Jump()
         {
 
-            MainScreen.air = true;
+            //MainScreen.air = true;
                 MainScreen.gravity++;
 
                 if (MainScreen.gravity > 0)
                 {
                      MainScreen.jumpSpeed++;
+                MainScreen.air = false;
 
-                }
+            }
 
                 y = y + MainScreen.gravity;
         }

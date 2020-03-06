@@ -39,14 +39,14 @@ namespace _2D_Game
         {
             hero = new Hero(Width / 2 - hSize / 2, 400, hSize);
 
-               // Block b1 = new Block(20, 0, 600, 20);
+             Block b1 = new Block(400, 300, 20, 200);
             Block b2 = new Block(0, 415, 20, 800);
             Block b3 = new Block(200, 280, 20, 100);
-           // blocksList.Add(b1);
+           blocksList.Add(b1);
             blocksList.Add(b2);
             blocksList.Add(b3);
 
-            gravity = -24;
+            gravity = -30;
             jumpSpeed = 0;
         }
 
@@ -99,6 +99,7 @@ namespace _2D_Game
             if (upArrowDown)
             {
                 hero.Jump();
+                air = true;
 
             }
             if (!upArrowDown)
@@ -119,14 +120,16 @@ namespace _2D_Game
                 counter = 0;
             }
 
+            
 
+                //collision
 
-            //collision
-
-            foreach (Block bonk in blocksList)
+                foreach (Block bonk in blocksList)
             {
                 Rectangle heroRec = new Rectangle(hero.x, hero.y, hero.size, hero.size);
                 Rectangle blockRec = new Rectangle(bonk.x, bonk.y, bonk.w, bonk.h);
+
+              
 
                 if (leftArrowDown)
                 {
@@ -150,35 +153,50 @@ namespace _2D_Game
                 }
 
 
-
-                if (heroRec.IntersectsWith(blockRec) && hero.x <= bonk.x - 10 && hero.x + hero.size >= bonk.x + bonk.w + 10)
+                
+                if (heroRec.IntersectsWith(blockRec) && 
+                    hero.x + hero.size<= bonk.x && 
+                    hero.x  >= bonk.x + bonk.w)
                 {
                     
                 }
-                if (heroRec.IntersectsWith(blockRec) && hero.x >= bonk.x  - 10 && hero.x + hero.size <= bonk.x + bonk.w + 10)
+                else if (heroRec.IntersectsWith(blockRec) &&
+                    hero.x + hero.size >= bonk.x &&
+                    hero.x <= bonk.x + bonk.w && hero.y < bonk.y)
                 {
-                    hero.y  = bonk.y - hero.size ;
-                    this.BackColor = Color.Purple;
-                    upArrowDown = false;
-                    air = false;
-                    gravity = -30;
-                    jumpSpeed = 0;
-                    hero.x = hero.x;
+                    if (!air)
+                    {
+                        hero.y = bonk.y - hero.size + 1;
+                        this.BackColor = Color.Purple;
+                        upArrowDown = false;
+                        air = false;
+                        gravity = -30;
+                        jumpSpeed = 0;
+                        hero.x = hero.x;
+                    }
+                    else if (air)
+                    {
+                        hero.y = bonk.y + bonk.h;
+                        
+                    }
+                    
                 }
 
 
-               else if (left && heroRec.IntersectsWith(blockRec))
-                {
-                    hero.x = bonk.x + bonk.w;
-                }
-                else if (right && heroRec.IntersectsWith(blockRec))
-                {
-                    hero.x = bonk.x - hero.size;
-                }
+                //else if (left && heroRec.IntersectsWith(blockRec))
+                // {
+                //     hero.x = bonk.x + bonk.w;
+                // }
+                // else if (right && heroRec.IntersectsWith(blockRec))
+                // {
+                //     hero.x = bonk.x - hero.size;
+                // }
                 else
                 {
                     this.BackColor = Color.Green;
                 }
+
+                
                 
 
 
