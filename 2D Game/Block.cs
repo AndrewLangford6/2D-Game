@@ -35,5 +35,11 @@ namespace _2D_Game
             }
 
         }
+
+        public void Drift()
+        {
+            y++;
+        }
+            
     }
 }
