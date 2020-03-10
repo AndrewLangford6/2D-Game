@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace _2D_Game
 {
     public partial class MainScreen : UserControl
     {
         List<Block> blocksList = new List<Block>();
+
+        SoundPlayer player = new SoundPlayer(Properties.Resources.Jump);
+        SoundPlayer player2 = new SoundPlayer(Properties.Resources.Fall);
 
         Random randGen = new Random();
 
@@ -35,7 +39,7 @@ namespace _2D_Game
 
         public static bool jumping = false;
         public static bool jumping2 = false;
-        public static int gravity, jumpSpeed, counter;
+        public static int gravity, jumpSpeed, counter, counter2, groovin, score;
         public static bool left, right, air;
 
         Hero hero;
@@ -50,19 +54,27 @@ namespace _2D_Game
         {
             hero = new Hero(Width / 2 - hSize / 2, 400, hSize);
 
-            Block b1 = new Block(400, 300, 20, 200);
-            Block b2 = new Block(0, 415, 20, 800);
-            Block b3 = new Block(200, 280, 20, 100);
+            Block b1 = new Block(100, 250, 20, 100);
+            Block b2 = new Block(0, 400, 20, 800);
+            Block b3 = new Block(300, 100, 20, 100);
+            Block b4 = new Block(200, -50, 20, 100);
+            
             blocksList.Add(b1);
             blocksList.Add(b2);
             blocksList.Add(b3);
+            blocksList.Add(b4);
+
 
             gravity = -30;
             jumpSpeed = 0;
+
+            groovin = 4;
+            
         }
         public void end()
         {
-            ;
+            player2.Play();
+            timer1.Enabled = false;
         }
 
         private void Label1_Click(object sender, EventArgs e)
@@ -77,12 +89,14 @@ namespace _2D_Game
             {
                 case Keys.Left:
                     leftArrowDown = true;
+                    
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
                     break;
                 case Keys.Up:
                     upArrowDown = true;
+                    player.Play();
                     break;
             }
         }
@@ -105,8 +119,10 @@ namespace _2D_Game
         }
         public void gameLoop_Tick(object sender, EventArgs e)
         {
+            
+            scoreLabel.Text = Convert.ToString(score);
 
-            if(hero.y + hero.size == this.Height)
+            if (hero.y + hero.size >= this.Height)
             {
                 end();
             }
@@ -114,12 +130,14 @@ namespace _2D_Game
 
             hero.Fall();
             counter++;
-            //hero.x  = this.Width / 2 - hero.size / 2;
+            counter2++;
+            score = score + groovin/4;
 
 
             if (upArrowDown)
             {
-               hero.Jump();
+                
+                hero.Jump();
                 this.BackColor = Color.Green;
                 air = true;
 
@@ -129,36 +147,35 @@ namespace _2D_Game
 
             }
 
-            if (counter == 100)
+            if (counter == 25)
             {
                 newBoxCounter++;
 
                 boxLeftX += boxXOffset;
-
+                patternAmount = randGen.Next(0, this.Width - 99);
                 blockOff = randGen.Next(1, 3);
 
                 if(blockOff == 1)
                 {
-                    Block b1 = new Block(boxLeftX, hero.y - 100, 20, 100);
+                    Block b1 = new Block(patternAmount, -30, 20, 100);
                     blocksList.Add(b1);
                     counter = 0;
                 }
                 else
                 {
-                    Block b1 = new Block(boxRightX, hero.y - 100, 20, 100);
+                    Block b1 = new Block(patternAmount, -30, 20, 100);
                     blocksList.Add(b1);
                     counter = 0;
                 }
                 
 
-                if (newBoxCounter == patternAmount)
-                {
-                    boxXOffset = -boxXOffset;
-                    newBoxCounter = 0;
-
-                    patternAmount = randGen.Next(1, 8);
-                }
                
+            }
+
+            if (counter2 == 200)
+            {
+                groovin++;
+                counter2 = 0;
             }
 
 

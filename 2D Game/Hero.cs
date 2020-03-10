@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Media;
 
 namespace _2D_Game
 {
     class Hero
     {
 
-
+        
+        
 
         public SolidBrush heroBrush;
         public int x, y, size;
@@ -49,9 +51,9 @@ namespace _2D_Game
 
         public void Jump()
         {
-
+            
             //MainScreen.air = true;
-                MainScreen.gravity++;
+            MainScreen.gravity++;
 
                 if (MainScreen.gravity > 0)
                 {
