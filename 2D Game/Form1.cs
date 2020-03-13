@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// 2D jumper game
+/// Andrew Langford
+/// March 13th 2020
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,8 +26,8 @@ namespace _2D_Game
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MainScreen ms = new MainScreen();
-            this.Controls.Add(ms);
+            MenuScreen mes = new MenuScreen();
+            this.Controls.Add(mes);
         }
     }
 }

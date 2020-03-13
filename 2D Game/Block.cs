@@ -11,7 +11,7 @@ namespace _2D_Game
         public int x, y, h, w;
 
 
-
+        //create a constructor
         public Block(int _x, int _y, int _h, int _w)
         {
             x = _x;
@@ -22,6 +22,7 @@ namespace _2D_Game
 
         }
 
+        //allow the blocks to move to create the illusion of the character moving
         public void Move(string direction)
         {
             if (direction == "left")
@@ -36,6 +37,7 @@ namespace _2D_Game
 
         }
 
+        //the blocks fall faster over time to create a challange
         public void Drift()
         {
             y = y + MainScreen.groovin;

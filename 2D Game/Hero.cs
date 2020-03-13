@@ -10,14 +10,13 @@ namespace _2D_Game
 {
     class Hero
     {
-
-        
-        
-
+        //initialize
         public SolidBrush heroBrush;
         public int x, y, size;
         Random randGen = new Random();
 
+
+        //create a constructor
         public Hero(int _x, int _y, int _size)
         {
             x = _x;
@@ -26,6 +25,7 @@ namespace _2D_Game
 
             int randValue = randGen.Next(1, 3);
 
+            //generate a character that is Red or Orange
             if (randValue == 1)
             {
                 heroBrush = new SolidBrush(Color.Red);
@@ -35,37 +35,23 @@ namespace _2D_Game
                 heroBrush = new SolidBrush(Color.Orange);
             }
         }
-        public void Move(string direction)
-        {
-            if (direction == "left")
-            {
-                x = x - 10;
-            }
 
-            if (direction == "right")
-            {
-                x = x + 10;
-            }
-
-        }
-
+        //making the character jump
         public void Jump()
         {
             
-            //MainScreen.air = true;
             MainScreen.gravity++;
 
                 if (MainScreen.gravity > 0)
                 {
                      MainScreen.jumpSpeed++;
-                MainScreen.air = false;
 
             }
 
                 y = y + MainScreen.gravity;
         }
 
-
+        //making the character fall at a passive rate
         public void Fall()
         {
             y = y + MainScreen.jumpSpeed;
