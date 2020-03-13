@@ -109,5 +109,11 @@
   <ItemGroup>
     <None Include="Resources\Falling Off-SoundBible.com-1209518917.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\865.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mr_L_Render.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

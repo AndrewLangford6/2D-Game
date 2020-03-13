@@ -77,5 +77,15 @@ namespace _2D_Game.Properties {
                 return ResourceManager.GetStream("Jump", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mr_L {
+            get {
+                object obj = ResourceManager.GetObject("Mr_L", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -136,6 +136,7 @@ namespace _2D_Game
             hero.Fall();
             counter++;
             counter2++;
+            Rectangle heroRecImage = new Rectangle(hero.x, hero.y, hero.size, hero.size);
 
 
             //if you press the up key jump
@@ -236,6 +237,9 @@ namespace _2D_Game
             //draw the hero and the boxes to the screen
 
             e.Graphics.FillRectangle(hero.heroBrush, hero.x, hero.y, hero.size, hero.size);
+
+            //draw an image to the screen
+            //e.Graphics.DrawImage(Properties.Resources.Mr_L, hero.x, hero.y, hero.size, hero.size);
 
             foreach (Block b in blocksList)
             {
